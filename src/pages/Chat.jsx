@@ -9,13 +9,23 @@ const Chat = () => {
   const [input, setInput] = useState("");
 
   useEffect(() => {
+    socket.on("connect", () => {
+      console.log("Connected to socket server");
+    });
+
     socket.on("message", (message) => {
       console.log("Received message:", message); // Debug log
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
+    socket.on("disconnect", () => {
+      console.log("Disconnected from socket server");
+    });
+
     return () => {
+      socket.off("connect");
       socket.off("message");
+      socket.off("disconnect");
     };
   }, []);
 
