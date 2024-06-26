@@ -33,6 +33,7 @@ const Chat = () => {
     if (input.trim()) {
       console.log("Sending message:", input); // Debug log
       socket.emit("message", input);
+      setMessages((prevMessages) => [...prevMessages, input]); // Ensure the message is added to the state
       setInput("");
     }
   };
