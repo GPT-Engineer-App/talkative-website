@@ -10,6 +10,7 @@ const Chat = () => {
 
   useEffect(() => {
     socket.on("message", (message) => {
+      console.log("Received message:", message); // Debug log
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
@@ -20,6 +21,7 @@ const Chat = () => {
 
   const sendMessage = () => {
     if (input.trim()) {
+      console.log("Sending message:", input); // Debug log
       socket.emit("message", input);
       setInput("");
     }
